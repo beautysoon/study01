@@ -1,0 +1,1 @@
+export const LOGIN_TEACHER = 'LOGIN_TEACHER';

@@ -1,0 +1,9 @@
+form{
+    text-align: center;
+    margin-top: 15%;
+}
+.div_main{
+    position:relative;
+    left:35%;
+    /*margin-left:-width/2;*/
+}

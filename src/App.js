@@ -1,26 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React,{Component} from 'react';
+import './css/Welcome.css';
+import {BrowserRouter, Route} from "react-router-dom";
+import StuLogin from "./component/stu/StuLogin";
+import TeaLogin from "./component/tea/TeaLogin";
+import AdmLogin from "./component/adm/AdmLogin"
+import Welcome from "./component/Welcome";
+import AdmIndex from './component/adm/AdmIndex';
+import StuManage from './component/adm/StuManage';
+import AddCourse from "./component/tea/AddCourse";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component{
+    constructor(){
+        super()
+        this.state = {users: []};
+    }
+    render() {
+        return (
+            <div>
+                <BrowserRouter>
+                    <Route path="/" exact component={Welcome}/>
+                    <Route path="/StuLogin" component={StuLogin}/>
+                    <Route path="/TeaLogin" component={TeaLogin}/>
+                    <Route path="/AdmLogin" component={AdmLogin}/>
+                    <Route path="/AdmIndex" component={AdmIndex}/>
+                    <Route path="/StuManage" component={StuManage}/>
+                    <Route path="/AddCourse" component={AddCourse}/>
+                </BrowserRouter>
+                {/*<div className="App">*/}
+                    {/*{this.state.users.map((user, index) => {*/}
+                        {/*return (<h1 key={index}>{user.name}</h1>)*/}
+                    {/*})}*/}
+                {/*</div>*/}
+            </div>
+        )
+    }
 }
-
 export default App;
+
+
