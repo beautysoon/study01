@@ -1,7 +1,9 @@
 import React,{Component} from 'react';
+import '../../css/manage.css'
 import Input from '@material-ui/core/Input';
 import Button from "@material-ui/core/Button";
 import axios from "axios";
+import {Paper} from "@material-ui/core";
 
 class StuManage extends Component{
     constructor(props) {
@@ -54,6 +56,8 @@ class StuManage extends Component{
                     case 200:
                         alert("修改成功！");
                         break;
+                    default:
+                        console.log("StuManageDefault");
                 }
             })
             .catch(function (error) {
@@ -65,6 +69,7 @@ class StuManage extends Component{
     render() {
         return (
             <div>
+                <Paper className="pap">
                 <form onSubmit={this.onSubmit}>
                     <table>
                         <thead>
@@ -76,7 +81,6 @@ class StuManage extends Component{
                         <tr>
                             <td>学号：</td>
                             <td><Input type="text" id="stuId" onChange={this.onChange}/></td>
-                            {/*<td><label>{this.resMsg}</label></td>*/}
                         </tr>
                         <tr>
                             <td>密码：</td>
@@ -89,11 +93,12 @@ class StuManage extends Component{
                         </tbody>
                         <tfoot>
                         <tr>
-                            <td><Button type="submit" color="secondary">提交</Button></td>
+                            <td colSpan="2"><Button type="submit" color="secondary">提交</Button></td>
                         </tr>
                         </tfoot>
                     </table>
                 </form>
+                </Paper>
             </div>
         );
     }

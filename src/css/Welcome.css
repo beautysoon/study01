@@ -24,11 +24,13 @@
 }
 ul{
   list-style: none;
-  width: 54%;
+  text-align: center;
+  /*width: 54%;*/
 }
 ul li{
-  margin-left: 5px;
-  float: right;
+  margin-right: 25px;
+  display:inline-block;
+  /*float: right;*/
 }
 @keyframes App-logo-spin {
   from {

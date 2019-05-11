@@ -1,7 +1,9 @@
 import React,{Component} from 'react';
+import '../../css/manage.css'
 import Input from '@material-ui/core/Input';
 import Button from "@material-ui/core/Button";
 import axios from "axios";
+import {Paper} from "@material-ui/core";
 
 class TeaManage extends Component{
     constructor(props) {
@@ -59,6 +61,8 @@ class TeaManage extends Component{
                     case 200:
                         alert("修改成功！");
                         break;
+                    default:
+                        console.log("TeaManageDefault");
                 }
             })
             .catch(function (error) {
@@ -69,6 +73,7 @@ class TeaManage extends Component{
     render() {
         return (
             <div>
+                <Paper className="pap">
                 <form onSubmit={this.onSubmit}>
                     <table>
                         <thead>
@@ -97,11 +102,12 @@ class TeaManage extends Component{
                         </tbody>
                         <tfoot>
                         <tr>
-                            <td><Button type="submit" color="secondary">提交</Button></td>
+                            <td colSpan="2"><Button type="submit" color="secondary">提交</Button></td>
                         </tr>
                         </tfoot>
                     </table>
                 </form>
+                </Paper>
             </div>
         );
     }

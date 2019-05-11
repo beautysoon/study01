@@ -2,7 +2,9 @@ import React,{Component} from 'react';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button'
 import axios from "axios";
-import store from '../../redux/store';
+import {connect} from "react-redux";
+import {mapDispatchToProps, mapStateToProps} from "../../redux/conn";
+import {Paper} from "@material-ui/core";
 
 class AddCourse extends Component{
     constructor(props){
@@ -25,13 +27,19 @@ class AddCourse extends Component{
         }
     }
     onSubmit(event){
+        const {value} = this.props;
         axios.post('http://127.0.0.1:800/addCourse', {
             params: {
+                teaId: value,
                 courseName: this.state.courseName
             }
         })
             .then(function (res) {
-                console.log(res);
+                if (res.data.status === 200) {
+                    alert("添加成功！");
+                }else {
+                    alert("添加失败！");
+                }
             })
             .catch(function (error) {
                 console.log(error);
@@ -41,6 +49,7 @@ class AddCourse extends Component{
     render() {
         return (
             <div>
+                <Paper className="pap">
                 <form onSubmit={this.onSubmit}>
                     <table>
                         <thead>
@@ -52,18 +61,22 @@ class AddCourse extends Component{
                         <tr>
                             <td>课程名：</td>
                             <td><Input type="text" id="courseName" onChange={this.onChange}/></td>
-                            <td><label>{this.resMsg}</label></td>
                         </tr>
                         </tbody>
                         <tfoot>
                         <tr>
-                            <td><Button type="submit" color="secondary">提交</Button></td>
+                            <td colSpan={2}><Button type="submit" color="secondary">提交</Button></td>
                         </tr>
                         </tfoot>
                     </table>
                 </form>
+                </Paper>
             </div>
         );
     }
 }
-export default AddCourse;
+const AddCourseLogic = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(AddCourse);
+export default AddCourseLogic;

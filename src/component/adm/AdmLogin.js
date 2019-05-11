@@ -3,10 +3,10 @@ import '../../css/login.css';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 import axios from "axios";
-import {connect} from "react-redux";
-import {mapStateToProps,mapDispatchToProps} from '../../redux/conn'
-import {Route,withRouter} from "react-router-dom";
-import AdmIndex from "./AdmIndex";
+import {Paper} from "@material-ui/core";
+// import {connect} from "react-redux";
+// import {mapStateToProps,mapDispatchToProps} from '../../redux/conn'
+// import {Route,withRouter} from "react-router-dom";
 
 class AdmLogin extends Component {
     constructor(props) {
@@ -15,8 +15,7 @@ class AdmLogin extends Component {
             id: "",
             password: "",
             inputMsg1: "",
-            inputMsg2: "",
-            stat:""
+            inputMsg2: ""
         };
         this.handleChange = this.handleChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -38,17 +37,19 @@ class AdmLogin extends Component {
         }
     }
 
-    onSubmit(event) {
+    onSubmit = (event)=> {
+        const props = this.props;
+        const state = this.state;
+        // const { onClick } = this.props;
         if (this.state.id!==0 && this.state.password!=="") {
             this.setState({
                 inputMsg1: "",
                 inputMsg2: ""
             });
-            axios.post('http://127.0.0.1:800/checkAdm', {
+            axios.post('http://127.0.0.1:800/checkLogin/adm', {
                 params: {
                     id: this.state.id,
-                    password: this.state.password,
-                    props:this.props
+                    password: this.state.password
                 }
             })
                 .then(function (res) {
@@ -61,9 +62,10 @@ class AdmLogin extends Component {
                             alert("密码不正确！");
                             break;
                         case 200:
-                            console.log(res.data.id);
-                            // console.log(this.props);
-                            window.location.href=`http://127.0.0.1:3000/AdmIndex?${res.data.id}`;
+                            console.log(state);
+                            // onClick(state.id);
+                            props.history.push('/AdmIndex');
+                            // window.location.href=`http://127.0.0.1:3000/AdmIndex?${res.data.id}`;
                             break;
                         default:
                             console.log("AdmLoginDefault");
@@ -82,46 +84,43 @@ class AdmLogin extends Component {
             });
         }
         event.preventDefault();
-    }
+    };
 
     render() {
-        const { value,onClick } = this.props;
-        if (this.state.stat===200) {
-            return(
-                <Route path="/AdmIndex" component={AdmIndex}/>
-            );
-        }else {
-            return (
-                <div className="div_main">
+        // const { value,onClick } = this.props;
+        return (
+            <div className="div_main">
+                <Paper className="log">
                 <form onSubmit={this.onSubmit}>
                     <table>
                         <tbody>
                         <tr>
-                            <td>账号:</td>
+                            <td>账号：</td>
                             <td><Input name="id" type="text" value={this.state.id} onChange={this.handleChange} /></td>
                             <td><label>{this.state.inputMsg1}</label></td>
                         </tr>
                         <tr>
-                            <td>密码:</td>
+                            <td>密码：</td>
                             <td><Input name="password" type="password" value={this.state.password} onChange={this.handleChange} /></td>
                             <td><label>{this.state.inputMsg2}</label></td>
                         </tr>
                         </tbody>
                     {/*<textarea value={`id is ${this.state.id},and password is ${this.state.password}`}/><br/>*/}
-                        <tfoot><tr aria-colspan="3"><td><Button type="submit" color="secondary">登录</Button></td></tr></tfoot>
+                        <tfoot><tr><td colSpan={3}><Button type="submit" color="secondary">登录</Button></td></tr></tfoot>
                     </table>
                 </form>
-                    <label>{value}</label>
-                    <button onClick={()=>onClick(this.state.id)}>click</button>
-                </div>
-            );
-        }
+                {/*<label>{value}</label>*/}
+                {/*<button onClick={()=>onClick(this.state.id)}>click</button>*/}
+                </Paper>
+            </div>
+        );
     }
+
 }
-const AdmLoginLogic = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(withRouter(AdmLogin));
-export default AdmLoginLogic;
+// const AdmLoginLogic = connect(
+//     mapStateToProps,
+//     mapDispatchToProps
+// )(AdmLogin);
+export default AdmLogin;
 // export default withRouter(AdmLoginLogic);
 

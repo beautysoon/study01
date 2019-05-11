@@ -1,7 +1,4 @@
-import React from 'react';
-import {connect} from "react-redux";
 import {teaLoginAction} from "./action";
-import {bindActionCreators} from "redux";
 
 export function mapStateToProps(state) {
     return {
@@ -13,7 +10,6 @@ export function mapStateToProps(state) {
 export function mapDispatchToProps(dispatch) {
     return {
         onClick: (id) => {
-            // console.log(id);
             dispatch(teaLoginAction(id));
             //bindActionCreators(teaLoginAction,dispatch);
         }

@@ -6,12 +6,14 @@ import TeaLogin from "./component/tea/TeaLogin";
 import AdmLogin from "./component/adm/AdmLogin"
 import Welcome from "./component/Welcome";
 import AdmIndex from './component/adm/AdmIndex';
+import TeaManage from './component/adm/TeaManage';
 import StuManage from './component/adm/StuManage';
 import AddCourse from "./component/tea/AddCourse";
+import SelCourse from "./component/stu/SelCourse";
 
 class App extends Component{
     constructor(){
-        super()
+        super();
         this.state = {users: []};
     }
     render() {
@@ -23,8 +25,10 @@ class App extends Component{
                     <Route path="/TeaLogin" component={TeaLogin}/>
                     <Route path="/AdmLogin" component={AdmLogin}/>
                     <Route path="/AdmIndex" component={AdmIndex}/>
+                    <Route path="/TeaManage" component={TeaManage}/>
                     <Route path="/StuManage" component={StuManage}/>
                     <Route path="/AddCourse" component={AddCourse}/>
+                    <Route path="/SelCourse" component={SelCourse}/>
                 </BrowserRouter>
                 {/*<div className="App">*/}
                     {/*{this.state.users.map((user, index) => {*/}

@@ -1,5 +1,5 @@
 import {LOGIN_TEACHER} from "./actionType";
-import {combineReducers} from "redux";
+// import {combineReducers} from "redux";
 
 function teaLogin(state = {id:0}, action) {
     switch (action.type) {
